@@ -9,6 +9,7 @@ public class Tiger extends Predator {
     }
 
     public Tiger(String nm) {
-        super(nm);
+        name = nm;
+        System.out.println("Tiger with name " + name);
     }
 }

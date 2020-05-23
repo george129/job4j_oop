@@ -9,5 +9,6 @@ public class Animal {
 
     public Animal(String nm) {
         name = nm;
+        System.out.println("Animal with name " + name);
     }
 }
