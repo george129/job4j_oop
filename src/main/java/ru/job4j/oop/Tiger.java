@@ -1,7 +1,6 @@
 package ru.job4j.oop;
 
 public class Tiger extends Predator {
-    String name;
 
     public Tiger() {
         super();
@@ -9,7 +8,7 @@ public class Tiger extends Predator {
     }
 
     public Tiger(String nm) {
-        name = nm;
-        System.out.println("Tiger with name " + name);
+        super(nm);
+        System.out.println("Tiger with name " + super.name);
     }
 }

@@ -1,7 +1,6 @@
 package ru.job4j.oop;
 
 public class Predator extends  Animal {
-    String name;
 
     public Predator() {
         super();
@@ -9,7 +8,7 @@ public class Predator extends  Animal {
     }
 
     public Predator(String nm) {
-        name = nm;
-        System.out.println("Predator with name " + name);
+        super(nm);
+        System.out.println("Predator with name " + super.name);
     }
 }
