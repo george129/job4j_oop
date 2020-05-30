@@ -31,6 +31,14 @@ public class Tracker {
         }
     }
 
+    public void delete(String id) {
+        int n = indexOf(id);
+        if (n >= 0) {
+            System.arraycopy(items, n + 1, items, index, index - n);
+            index--;
+        }
+    }
+
     private int indexOf(String id) {
         int ind = -1;
         for (int i = 0; i < index; i++) {
