@@ -48,21 +48,17 @@ public class Tracker {
         return Arrays.copyOf(found, indx);
     }
 
-    public Item[] findById(String id) {
+    public Item findById(String id) {
         if (index == 0) {
             return null;
         }
-        Item[] found = new Item[items.length];
-        int indx = 0;
+        int indx = -2;
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null && items[i].getId().matches(id)) {
-                found[indx] = items[i];
-                indx++;
+                indx = i;
+                return items[i];
             }
         }
-        if (indx == 0) {
-            return null;
-        }
-        return Arrays.copyOf(found, indx);
+        return indx < 0 ? null : items[indx];
     }
 }

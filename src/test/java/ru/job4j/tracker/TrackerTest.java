@@ -49,6 +49,6 @@ public class TrackerTest {
         tr.add(new Item("fgvs"));
         tr.add(new Item("1234"));
         System.out.println(tr.findByName("1234")[0].getId());
-        Assert.assertEquals("1234", tr.findById(tr.findByName("1234")[0].getId())[0].getName());
+        Assert.assertEquals("1234", tr.findById(tr.findByName("1234")[0].getId()).getName());
     }
 }
