@@ -51,4 +51,15 @@ public class TrackerTest {
         System.out.println(tr.findByName("1234")[0].getId());
         Assert.assertEquals("1234", tr.findById(tr.findByName("1234")[0].getId()).getName());
     }
+
+    @Test
+    public void replace() {
+        Tracker tr = new Tracker();
+        Item it = new Item("Bug");
+        tr.add(it);
+        String id = it.getId();
+        Item itDesc = new Item("Bug with description");
+        tr.replace(id, itDesc);
+        Assert.assertEquals("Bug with description",tr.findById(id).getName());
+    }
 }
