@@ -8,35 +8,38 @@ public class Tracker {
     private Item[] items = new Item[100];
     private int index;
 
-    public Tracker() {
-        index = 0;
-    }
-
     public String generateId() {
         Random rnd = new Random();
         return String.valueOf(rnd.nextLong() + System.currentTimeMillis());
     }
 
     public Item add(Item item) {
+        if (item == null) {
+            return null;
+        }
         item.setId(generateId());
         items[index++] = item;
         return items[index - 1];
     }
 
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
         int n = indexOf(id);
         if (n >= 0) {
-            item.setId(items[n].getId());
+            item.setId(id);
             items[n] = item;
+            return true;
         }
+        return false;
     }
 
-    public void delete(String id) {
+    public boolean delete(String id) {
         int n = indexOf(id);
         if (n >= 0) {
             System.arraycopy(items, n + 1, items, index, index - n);
             index--;
+            return true;
         }
+        return false;
     }
 
     private int indexOf(String id) {
@@ -51,20 +54,14 @@ public class Tracker {
     }
 
     public Item[] findAll() {
-        if (index == 0) {
-            return null;
-        }
-        return Arrays.copyOf(items, index);
+        return index == 0 ? null : Arrays.copyOf(items, index);
     }
 
     public Item[] findByName(String key) {
-        if (index == 0) {
-            return null;
-        }
         Item[] found = new Item[items.length];
         int indx = 0;
         for (int i = 0; i < items.length; i++) {
-            if (items[i] != null && items[i].getName().matches(key)) {
+            if (items[i] != null && items[i].getName().equals(key)) {
                 found[indx] = items[i];
                 indx++;
             }
@@ -76,9 +73,6 @@ public class Tracker {
     }
 
     public Item findById(String id) {
-        if (index == 0) {
-            return null;
-        }
         int indx = indexOf(id);
         return indx < 0 ? null : items[indx];
     }
