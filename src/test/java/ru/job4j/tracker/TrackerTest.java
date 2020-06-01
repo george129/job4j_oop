@@ -19,8 +19,8 @@ public class TrackerTest {
     @Test
     public void checkNulls() {
         Tracker tr = new Tracker();
-        Assert.assertEquals(null, tr.findByName("10"));
-        Assert.assertEquals(null, tr.findAll());
+        Assert.assertEquals(0, tr.findByName("10").length);
+        Assert.assertEquals(0, tr.findAll().length);
         Assert.assertEquals(null, tr.findById("10"));
     }
 
@@ -48,7 +48,6 @@ public class TrackerTest {
         Tracker tr = new Tracker();
         tr.add(new Item("fgvs"));
         tr.add(new Item("1234"));
-        System.out.println(tr.findByName("1234")[0].getId());
         Assert.assertEquals("1234", tr.findById(tr.findByName("1234")[0].getId()).getName());
     }
 
