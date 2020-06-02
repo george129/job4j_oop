@@ -11,7 +11,7 @@ public class Matches {
     public static void main(String[] args) {
         System.out.println("Игра \"11\"\n"
                 + "На столе 11 спичек. Двое игроков тянут по очереди от 1 до 3 спичек."
-                + "Кто вытянет ");
+                + " Кто вытянет последние спички, тот выиграл.");
         System.out.println("Спичек: 11");
         int left = 11;
         boolean player = false;
@@ -19,12 +19,12 @@ public class Matches {
         byte answer;
         for (; left > 3;) {
             System.out.println("Ход игрока " + playerNo(player));
-            do {
-                answer = sc.nextByte();
-            } while (answer < 1 || answer > 3);
-            left -= answer;
-            System.out.println("Спичек: " + left);
-            player = !player;
+            answer = sc.nextByte();
+            if (answer > 0 && answer < 4) {
+                left -= answer;
+                System.out.println("Спичек: " + left);
+                player = !player;
+            }
         }
         if (left < 4) {
             System.out.println("Игрок " + playerNo(player) + " выиграл!");
