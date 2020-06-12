@@ -5,73 +5,72 @@ import java.util.Scanner;
 public class StartUI {
     public void init(Scanner sc, Tracker tr) {
         boolean run = true;
-        int select;
-        String name;
-        String id;
-        Item itm;
-        Item[] itarr;
         while (run) {
             this.showMenu();
-            select = Integer.parseInt(sc.nextLine());
+            int select = Integer.parseInt(sc.nextLine());
             switch (select) {
                 case 0:
                     System.out.print("Enter new item name: ");
-                    name = sc.nextLine();
-                    tr.add(new Item(name));
+                    String addName = sc.nextLine();
+                    tr.add(new Item(addName));
                     break;
                 case 1:
-                    itarr = tr.findAll();
-                    if (itarr != null) {
-                        for (int i = 0; i < itarr.length; i++) {
-                            System.out.println("[" + itarr[i].getId() + "]:" + itarr[i].getName());
+                    Item[] itarrList = tr.findAll();
+                    if (itarrList.length != 0) {
+                        for (int i = 0; i < itarrList.length; i++) {
+                            System.out.println("[" + itarrList[i].getId() + "]:" + itarrList[i].getName());
                         }
+                    } else {
+                        System.out.println("Empty");
                     }
                     break;
                 case 2:
                     System.out.print("Enter ID to edit: ");
-                    id = sc.nextLine();
-                    itm = tr.findById(id);
-                    if (itm == null) {
+                    String idEdit = sc.nextLine();
+                    Item itmEdit = tr.findById(idEdit);
+                    if (itmEdit == null) {
                         System.out.println("Not found");
                         break;
                     }
                     System.out.print("New item name: ");
-                    name = sc.nextLine();
-                    itm.setName(name);
-                    if (tr.replace(id, itm)) {
+                    String newName = sc.nextLine();
+                    itmEdit.setName(newName);
+                    if (tr.replace(idEdit, itmEdit)) {
                         System.out.println("Replace completed.");
                     } else {
-                        System.out.println("Error while tried to edit id=" + id);
+                        System.out.println("Error while tried to edit id=" + idEdit);
                     }
                     break;
                 case 3:
                     System.out.print("Enter Id to delete: ");
-                    id = sc.nextLine();
-                    Item del = tr.findById(id);
+                    String idDelete = sc.nextLine();
+                    Item del = tr.findById(idDelete);
                     if (tr.delete(del.getId())) {
-                        System.out.println("Item " + id + " deleted.");
+                        System.out.println("Item " + idDelete + " deleted.");
                     } else {
-                        System.out.println("Error while tried to delete id=" + id);
+                        System.out.println("Error while tried to delete id=" + idDelete);
                     }
                     break;
                 case 4:
                     System.out.print("Enter id to find: ");
-                    id = sc.nextLine();
-                    itm = tr.findById(id);
-                    if (itm != null) {
-                        System.out.println("found: [" + itm.getId() + "]:" + itm.getName());
+                    String idFind = sc.nextLine();
+                    Item itmFind = tr.findById(idFind);
+                    if (itmFind != null) {
+                        System.out.println("found: [" + itmFind.getId() + "]:" + itmFind.getName());
+                    } else {
+                        System.out.println("Nothing found with id " + idFind);
                     }
                     break;
                 case 5:
                     System.out.print("Enter name to find: ");
-                    name = sc.nextLine();
-                    itarr = tr.findByName(name);
-                    if (itarr != null) {
-                        for (int i = 0; i < itarr.length; i++) {
-                            System.out.println("[" + itarr[i].getId() + "]:" + itarr[i].getName());
+                    String findName = sc.nextLine();
+                    Item[] itarrFind = tr.findByName(findName);
+                    if (itarrFind != null) {
+                        for (int i = 0; i < itarrFind.length; i++) {
+                            System.out.println("[" + itarrFind[i].getId() + "]:" + itarrFind[i].getName());
                         }
                     } else {
-                        System.out.println("Nothing found for " + name);
+                        System.out.println("Nothing found for \"" + findName + "\"");
                     }
                     break;
                 case 6: run = false; break;
