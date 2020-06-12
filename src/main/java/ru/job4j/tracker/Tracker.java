@@ -35,7 +35,7 @@ public class Tracker {
     public boolean delete(String id) {
         int n = indexOf(id);
         if (n >= 0) {
-            System.arraycopy(items, n + 1, items, index, index - n);
+            System.arraycopy(items, n + 1, items, n, index - n);
             index--;
             return true;
         }

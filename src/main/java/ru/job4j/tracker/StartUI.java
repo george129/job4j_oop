@@ -9,9 +9,10 @@ public class StartUI {
         String name;
         String id;
         Item itm;
+        Item[] itarr;
         while (run) {
             this.showMenu();
-            select = sc.nextInt();
+            select = Integer.parseInt(sc.nextLine());
             switch (select) {
                 case 0:
                     System.out.print("Enter new item name: ");
@@ -19,7 +20,13 @@ public class StartUI {
                     tr.add(new Item(name));
                     break;
                 case 1:
-                    tr.findAll(); break;
+                    itarr = tr.findAll();
+                    if (itarr != null) {
+                        for (int i = 0; i < itarr.length; i++) {
+                            System.out.println("[" + itarr[i].getId() + "]:" + itarr[i].getName());
+                        }
+                    }
+                    break;
                 case 2:
                     System.out.print("Enter ID to edit: ");
                     id = sc.nextLine();
@@ -33,25 +40,39 @@ public class StartUI {
                     itm.setName(name);
                     if (tr.replace(id, itm)) {
                         System.out.println("Replace completed.");
+                    } else {
+                        System.out.println("Error while tried to edit id=" + id);
                     }
                     break;
                 case 3:
                     System.out.print("Enter Id to delete: ");
                     id = sc.nextLine();
                     Item del = tr.findById(id);
-                    if (tr.delete(id)) {
+                    if (tr.delete(del.getId())) {
                         System.out.println("Item " + id + " deleted.");
+                    } else {
+                        System.out.println("Error while tried to delete id=" + id);
                     }
                     break;
                 case 4:
                     System.out.print("Enter id to find: ");
                     id = sc.nextLine();
-                    tr.findById(id);
+                    itm = tr.findById(id);
+                    if (itm != null) {
+                        System.out.println("found: [" + itm.getId() + "]:" + itm.getName());
+                    }
                     break;
                 case 5:
-                    System.out.println("Enter name to find: ");
+                    System.out.print("Enter name to find: ");
                     name = sc.nextLine();
-                    tr.findByName(name);
+                    itarr = tr.findByName(name);
+                    if (itarr != null) {
+                        for (int i = 0; i < itarr.length; i++) {
+                            System.out.println("[" + itarr[i].getId() + "]:" + itarr[i].getName());
+                        }
+                    } else {
+                        System.out.println("Nothing found for " + name);
+                    }
                     break;
                 case 6: run = false; break;
                 default: continue;
