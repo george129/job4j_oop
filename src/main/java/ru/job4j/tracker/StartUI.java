@@ -32,8 +32,7 @@ public class StartUI {
                     break;
                 case 3:
                     String idDelete = in.askStr("Enter Id to delete: ");
-                    Item del = tr.findById(idDelete);
-                    if (del != null && tr.delete(del.getId())) {
+                    if (tr.delete(idDelete)) {
                         System.out.println("Item " + idDelete + " deleted.");
                     } else {
                         System.out.println("Error while tried to delete id=" + idDelete);
