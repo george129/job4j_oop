@@ -10,7 +10,7 @@ public class StubInput implements Input {
 
     @Override
     public String askStr(String question) {
-        return position + 1 <= answers.length ? answers[position++] : "";
+        return answers[position++];
     }
 
     @Override
