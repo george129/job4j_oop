@@ -15,11 +15,10 @@ public class StartUITest {
         StartUI.createItem(in, tr);
         StartUI.createItem(in, tr);
         Item[] created = tr.findAll();
-        Item[] expected = {new Item("Just for test"),new Item("List"), new Item("All"), new Item("Items")};
-        Assert.assertEquals(created[0].getName(), expected[0].getName());
-        Assert.assertEquals(created[1].getName(), expected[1].getName());
-        Assert.assertEquals(created[2].getName(), expected[2].getName());
-        Assert.assertEquals(created[3].getName(), expected[3].getName());
+        Assert.assertEquals(created[0].getName(), answer[0]);
+        Assert.assertEquals(created[1].getName(), answer[1]);
+        Assert.assertEquals(created[2].getName(), answer[2]);
+        Assert.assertEquals(created[3].getName(), answer[3]);
     }
 
     @Test
